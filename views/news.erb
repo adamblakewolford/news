@@ -18,12 +18,49 @@
     <!-- Your own CSS -->
     <link rel="stylesheet" href="/styles.css">
 
-    <title>News</title>
+    <title>News By Adam for Adam</title>
   </head>
   <body>
 
-    <div class="container mt-5">
-      <h1>News</h1>
+    <div class="container mt-5" style="background-color: green;">
+        <div class="text-center">
+            <h1 style="color: white;">News By Adam for Adam</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="text-center" style="background-color: blue;">
+                    <h3 style="color: white;">Weather</h3>
+                    <hr>
+                </div>
+                    <h6 class="text-center">Current Weather in Evanston, IL</h6>
+                    <li>
+                        <%= "It is currently #{@forecast["current"]["temp"].round()} and feels like #{@forecast["current"]["feels_like"].round()} and the forecast is #{@forecast["current"]["weather"][0]["description"]}" %>
+                    </li>
+                    <hr>
+                    <h6 class="text-center">Future Forecast for Evanston, IL</h6>
+                    <% for day in @forecast["daily"] %>
+                        <% @day_number = @day_number + 1 %>
+                        <li>
+                            <%= "Day #{@day_number} has a high of #{day["temp"]["max"].round()} a low of #{day["temp"]["min"].round()} and the forecast is #{day["weather"][0]["description"]}" %>
+                        </li>
+                    <% end %>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div style="background-color: grey;">
+                    <h3 class="text-center" style="color: white;">News Stories</h3>
+                    <% for story in @news["articles"] %>
+                    <li>
+                        <%= "<b>#{story["title"]}</b> by #{story["author"]}" %>
+                        <%= "<i>#{story["url"]}</i>" %>
+                        <hr>
+                    </li>
+                    <% end %>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Optional JavaScript -->
